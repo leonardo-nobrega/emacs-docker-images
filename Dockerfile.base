@@ -1,0 +1,32 @@
+
+# prologue
+# update packages in the image
+ARG BASE_IMAGE_VERSION=13-slim
+FROM debian:$BASE_IMAGE_VERSION
+RUN apt clean
+RUN apt update && apt upgrade -y
+
+# install mandatory packages
+RUN apt install -y emacs git
+
+# set up the user for the image; we don't want to run as root
+ARG DOCKER_USR_HOME=/home/docker_usr
+
+RUN mkdir -p $DOCKER_USR_HOME
+
+RUN groupadd -r docker_usr -g 1000 && \
+useradd -u 1000 -r -g docker_usr -d $DOCKER_USR_HOME \
+-s /sbin/nologin -c "docker container user" docker_usr
+
+# ... give sudo permissions to docker_usr
+RUN apt install -y sudo ; \
+echo "docker_usr ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+# ... change from root to docker_usr
+RUN chown -R docker_usr:docker_usr $DOCKER_USR_HOME
+USER docker_usr
+
+# epilogue
+VOLUME /code
+WORKDIR /code
+CMD /bin/bash
