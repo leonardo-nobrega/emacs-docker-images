@@ -15,6 +15,22 @@ RUN pip3 install pytest --break-system-packages
 {% endif %}
 
 # set up the user for the image; we don't want to run as root
+
+# Reference:
+# https://www.projectatomic.io/docs/docker-image-author-guidance/
+
+# groupadd:
+# -r system account
+# -g id for the new group
+
+# useradd:
+# -u user id
+# -r create a system account
+# -g id of the account's primary group
+# -d home directory
+# -s login shell
+# -c (comment): GECOS field for the new account
+
 ARG DOCKER_USR_HOME=/home/docker_usr
 
 RUN mkdir -p $DOCKER_USR_HOME
