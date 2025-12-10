@@ -1,0 +1,19 @@
+
+name: run tests
+on: workflow_dispatch
+jobs:
+  render_and_test:
+    name: render dockerfile, build test image, run tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: create virtual environment
+        run: python3 -m venv venv
+      - name: enter virtual environment
+        run: source venv/bin/activate
+      - name: render dockerfile with tests
+        run: python render.py -f -t
+      - name: build test image
+        run: docker build -t test-image .
+      - name: run tests
+        run: docker run --rm test-image
