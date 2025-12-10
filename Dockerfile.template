@@ -9,6 +9,11 @@ RUN apt update && apt upgrade -y
 # install mandatory packages
 RUN apt install -y emacs git
 
+{% if test %}
+RUN apt install -y python3 python3-pip
+RUN pip3 install pytest --break-system-packages
+{% endif %}
+
 # set up the user for the image; we don't want to run as root
 ARG DOCKER_USR_HOME=/home/docker_usr
 
@@ -26,7 +31,15 @@ echo "docker_usr ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 RUN chown -R docker_usr:docker_usr $DOCKER_USR_HOME
 USER docker_usr
 
+{% if test %}
+# run tests
+COPY build_test.py /
+RUN pytest build_test.py
+COPY run_test.py /
+ENTRYPOINT pytest /run_test.py
+{% else %}
 # epilogue
 VOLUME /code
 WORKDIR /code
 CMD /bin/bash
+{% endif %}
