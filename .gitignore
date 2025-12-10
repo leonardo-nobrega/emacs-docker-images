@@ -1,3 +1,9 @@
 
 # emacs backup files
 *~
+
+# virtual environment
+venv/
+
+# generated dockerfile
+Dockerfile
