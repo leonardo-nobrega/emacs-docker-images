@@ -6,3 +6,8 @@ def test_local_timezone_setting() -> None:
     completed_process = subprocess.run("date", capture_output=True)
     date_output = completed_process.stdout.decode()
     assert "EST" in date_output or "EDT" in date_output
+
+
+def test_sudo() -> None:
+    completed_process = subprocess.run(["sudo", "apt", "update"])
+    completed_process.check_returncode()
