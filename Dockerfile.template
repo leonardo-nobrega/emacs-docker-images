@@ -45,6 +45,12 @@ RUN apt install -y sudo ; \
 echo "docker_usr ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 # end: set up the user for the image
 
+# set the timezone
+# https://stackoverflow.com/a/44333806
+RUN DEBIAN_FRONTEND=noninteractive \
+apt-get install -y --no-install-recommends tzdata
+RUN ln -fs /usr/share/zoneinfo/America/Montreal /etc/localtime
+
 # change from root to docker_usr
 RUN chown -R docker_usr:docker_usr $DOCKER_USR_HOME
 USER docker_usr
