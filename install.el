@@ -1,0 +1,23 @@
+
+(require 'package)
+(package-initialize)
+(package-refresh-contents)
+
+(setq package-archives
+      '(("melpa" . "https://stable.melpa.org/packages/")))
+(package-initialize)
+(package-refresh-contents)
+
+(dolist
+    (package
+     (list
+      ;; start-package-list
+      'dockerfile-mode
+      'magit
+      'markdown-mode
+      'modus-themes
+      ;; end-package-list
+      ))
+  (package-install package))
+
+(kill-emacs)
