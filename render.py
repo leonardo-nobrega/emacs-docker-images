@@ -6,6 +6,16 @@ from os.path import exists
 from typing import Any
 
 LANGUAGES = ["py"]
+TEMPLATE_FILES = ["Dockerfile", "bashrc"]
+
+
+def render_file(
+        env: j.Environment, file_name: str, arguments: dict[str, Any]
+) -> None:
+    template = env.get_template(file_name + ".template")
+    rendered = template.render(**arguments)
+    with open(file_name, "w") as f:
+        f.write(rendered)
 
 
 def render(arguments: dict[str, Any]) -> None:
@@ -14,10 +24,8 @@ def render(arguments: dict[str, Any]) -> None:
         lstrip_blocks=True,
         trim_blocks=True
     )
-    template = env.get_template("Dockerfile.template")
-    rendered = template.render(**arguments)
-    with open("Dockerfile", "w") as f:
-        f.write(rendered)
+    for file_name in TEMPLATE_FILES:
+        render_file(env, file_name, arguments)
 
 
 if __name__ == "__main__":

@@ -71,6 +71,7 @@ COPY run_test.py /
 ENTRYPOINT pytest /run_test.py
 {% else %}
 # epilogue
+COPY bashrc $DOCKER_USR_HOME/.bashrc
 VOLUME /code
 WORKDIR /code
 CMD /bin/bash
