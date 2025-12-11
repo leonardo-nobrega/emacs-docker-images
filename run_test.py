@@ -23,6 +23,11 @@ def test_pip() -> None:
     assert completed_process.returncode == 0
 
 
+def test_venv() -> None:
+    completed_process = subprocess.run(["python3", "-m", "venv", "/tmp/venv"])
+    assert completed_process.returncode == 0
+
+
 def test_man_installed() -> None:
     completed_process = subprocess.run(["man", "-V"])
     assert completed_process.returncode == 0
