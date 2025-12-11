@@ -1,7 +1,7 @@
 
 # prologue
 # update packages in the image
-ARG BASE_IMAGE_VERSION=13-slim
+ARG BASE_IMAGE_VERSION=13
 FROM debian:$BASE_IMAGE_VERSION
 RUN apt clean
 RUN apt update && apt upgrade -y
