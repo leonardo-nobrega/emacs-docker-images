@@ -6,4 +6,18 @@ export LANG=en_CA
 export PYTHONDONTWRITEBYTECODE=1
 {% endif %}
 
+# use host's ssh agent
+if [ -e /run/host-services/ssh-auth.sock ]; then
+    sudo chmod 777 /run/host-services/ssh-auth.sock
+fi
+
+if [ -e $HOME/.ssh ]; then
+    ssh-add -L
+else
+    echo "*************************************************"
+    echo "Ssh-add requires that you map your .ssh directory"
+    echo "on the host to $HOME/.ssh"
+    echo "*************************************************"
+fi
+
 cat /etc/motd
