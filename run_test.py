@@ -11,3 +11,13 @@ def test_local_timezone_setting() -> None:
 def test_sudo() -> None:
     completed_process = subprocess.run(["sudo", "apt", "update"])
     completed_process.check_returncode()
+
+
+def test_python() -> None:
+    completed_process = subprocess.run("python3")
+    assert completed_process.returncode == 0
+
+
+def test_pip() -> None:
+    completed_process = subprocess.run("pip3")
+    assert completed_process.returncode == 0

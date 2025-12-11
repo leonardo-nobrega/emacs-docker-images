@@ -12,7 +12,7 @@ jobs:
       - name: enter virtual environment
         run: source venv/bin/activate
       - name: render dockerfile with tests
-        run: python render.py -f -t
+        run: python render.py -f -t -l py
       - name: build test image
         run: docker build -t test-image .
       - name: run tests
