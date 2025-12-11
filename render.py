@@ -22,8 +22,18 @@ if __name__ == "__main__":
     parser = ArgumentParser()
     parser.add_argument("-f", "--force", action="store_true")
     parser.add_argument("-t", "--test", action="store_true")
+    parser.add_argument(
+        "-l", "--lang",
+        nargs="*", action="extend",
+        choices=["py"]
+    )
     args = parser.parse_args()
     args_dict = {"test": args.test}
+
+    # add a "lang_" attribute with value True for every lang argument
+    for lang in args.lang or []:
+        args_dict["lang_" + lang] = True
+
     if args.force:
         render(args_dict)
     elif exists("Dockerfile"):
