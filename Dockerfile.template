@@ -9,19 +9,6 @@ RUN apt update && apt upgrade -y
 # include man pages in the image
 RUN apt install -y man-db
 
-# install mandatory packages
-RUN apt install -y emacs git
-
-{% if test %}
-RUN apt install -y python3 python3-pip
-RUN pip3 install pytest --break-system-packages
-{% endif %}
-
-{%- if lang_py %}
-# python
-RUN apt install -y python3 python3-pip
-{% endif %}
-
 # start: set up the user for the image
 # we don't want to run as root
 
@@ -58,6 +45,19 @@ echo "docker_usr ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 RUN DEBIAN_FRONTEND=noninteractive \
 apt-get install -y --no-install-recommends tzdata
 RUN ln -fs /usr/share/zoneinfo/America/Montreal /etc/localtime
+
+# install mandatory packages
+RUN apt install -y emacs git
+
+{% if test %}
+RUN apt install -y python3 python3-pip
+RUN pip3 install pytest --break-system-packages
+{% endif %}
+
+{%- if lang_py %}
+# python
+RUN apt install -y python3 python3-pip
+{% endif %}
 
 # change from root to docker_usr
 RUN chown -R docker_usr:docker_usr $DOCKER_USR_HOME
