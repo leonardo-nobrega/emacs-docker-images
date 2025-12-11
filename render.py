@@ -5,6 +5,8 @@ from argparse import ArgumentParser
 from os.path import exists
 from typing import Any
 
+LANGUAGES = ["py"]
+
 
 def render(arguments: dict[str, Any]) -> None:
     env = j.Environment(
@@ -25,13 +27,17 @@ if __name__ == "__main__":
     parser.add_argument(
         "-l", "--lang",
         nargs="*", action="extend",
-        choices=["py"]
+        choices=LANGUAGES
     )
     args = parser.parse_args()
     args_dict = {"test": args.test}
 
     # add a "lang_" attribute with value True for every lang argument
-    for lang in args.lang or []:
+    selected_languages = args.lang or []
+    if args.test:
+        # include all languages if we are testing
+        selected_languages = LANGUAGES
+    for lang in selected_languages:
         args_dict["lang_" + lang] = True
 
     if args.force:
