@@ -38,8 +38,10 @@ docker run --rm -it --detach-keys ctrl-z,z --name emacs-py emacs-py
 
 - Render a dockerfile to build the test image; pass the `-t` option to the render program. Optionally, pass the `-f` option to skip the overwrite question.
 
+  The dockerfile will have code to install all languages.
+
   ```
-  python render.py -t -l py
+  python render.py -t
   ```
 
 - Build the test image.
