@@ -6,6 +6,9 @@ FROM debian:$BASE_IMAGE_VERSION
 RUN apt clean
 RUN apt update && apt upgrade -y
 
+# include man pages in the image
+RUN apt install -y man-db
+
 # install mandatory packages
 RUN apt install -y emacs git
 
