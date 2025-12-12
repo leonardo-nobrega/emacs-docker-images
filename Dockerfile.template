@@ -2,7 +2,7 @@
 # prologue
 # update packages in the image
 ARG BASE_IMAGE_VERSION=13
-FROM debian:$BASE_IMAGE_VERSION
+FROM debian:$BASE_IMAGE_VERSION as base
 RUN apt clean
 RUN apt update && apt upgrade -y
 
@@ -49,22 +49,40 @@ RUN ln -fs /usr/share/zoneinfo/America/Montreal /etc/localtime
 # install mandatory packages
 RUN apt install -y emacs git
 
+FROM base as emacs-packages
 # install emacs packages
 COPY install.el /root/.emacs
 RUN emacs --daemon 2>&1 ; echo "ignoring emacs non-zero return code"
 RUN rm /root/.emacs
-RUN mv /root/.emacs.d $DOCKER_USR_HOME
-RUN chown -R docker_usr:docker_usr $DOCKER_USR_HOME
 
 {% if lang_py %}
+FROM base as python
 # python
 RUN apt install -y python3 python3-pip python3-venv
 RUN pip3 install --break-system-packages flake8
 {% endif %}
 
+FROM base as final
+{% if lang_py %}
+# copy python files from build stage
+# ... don't know a way to determine the version and use it
+#     within the build process
+ARG PYTHON_VERSION=3.13
+COPY --from=python /usr/local/lib/python${PYTHON_VERSION}/ /usr/local/lib/python${PYTHON_VERSION}/
+COPY --from=python /usr/lib/python${PYTHON_VERSION}/ /usr/lib/python${PYTHON_VERSION}/
+COPY --from=python /usr/lib/python3/ /usr/lib/python3/
+COPY --from=python /usr/local/bin/py* /usr/local/bin/
+COPY --from=python /usr/bin/py* /usr/bin/
+COPY --from=python /usr/bin/pip* /usr/bin/
+COPY --from=python /usr/bin/*python*-config /usr/bin/
+{% endif %}
+
 {%- if test %}
 RUN pip3 install pytest --break-system-packages
 {% endif %}
+
+# copy emacs packages from build stage
+COPY --from=emacs-packages /root/.emacs.d ${DOCKER_USR_HOME}/.emacs.d
 
 # change from root to docker_usr
 RUN chown -R docker_usr:docker_usr $DOCKER_USR_HOME
