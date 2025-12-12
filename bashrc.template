@@ -4,6 +4,8 @@ export LANG=en_CA
 
 {% if lang_py %}
 export PYTHONDONTWRITEBYTECODE=1
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+source /usr/local/bin/virtualenvwrapper.sh
 {% endif %}
 
 # use host's ssh agent

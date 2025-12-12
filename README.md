@@ -32,6 +32,17 @@ docker build -t emacs-py .
 docker run --rm -it --detach-keys ctrl-z,z --name emacs-py emacs-py
 ```
 
+### use with Python:
+
+- Create a virtual environment for your project. Install pyright and jsonrpc.
+
+- On Emacs:
+  - `M-x venv-workon` to activate the virtual environment, then
+  - `M-x eglot`
+
+Reference:
+https://olddeuteronomy.github.io/post/python-programming-in-emacs/
+
 ### develop:
 
 - Make a change to the template, the `render.py` program or one of the test suites: `build_test.py` and `run_test.py`.

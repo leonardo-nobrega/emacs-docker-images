@@ -16,6 +16,7 @@
       'magit
       'markdown-mode
       'modus-themes
+      'virtualenvwrapper
       ;; end-package-list
       ))
   (package-install package))

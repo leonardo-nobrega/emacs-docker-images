@@ -24,7 +24,7 @@ def test_pip() -> None:
 
 
 def test_venv() -> None:
-    completed_process = subprocess.run(["python3", "-m", "venv", "/tmp/venv"])
+    completed_process = subprocess.run(["virtualenv", "--version"])
     assert completed_process.returncode == 0
 
 
