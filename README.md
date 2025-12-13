@@ -28,8 +28,23 @@ docker build -t emacs-py .
 
 ### run a container after building an image:
 
+Here's a minimal command to run the container:
+
 ```
 docker run --rm -it --detach-keys ctrl-z,z --name emacs-py emacs-py
+```
+
+Add to the above options to:
+
+- map a directory on the host where the projects are onto the container;
+
+- open ports for web servers in the container that I want to access with the browser on the host:
+
+```
+docker run --rm -it --detach-keys ctrl-z,z --name emacs-py \
+-v $(pwd)/Documents/code:/code \
+-p 8080:8080 \
+emacs-py
 ```
 
 ### use with Python:
@@ -66,3 +81,7 @@ https://olddeuteronomy.github.io/post/python-programming-in-emacs/
   ```
   docker run --rm emacs-py-test
   ```
+
+### copy text out of Emacs onto the host's clipboard:
+
+Save it to a file, let's say `clipping`. If the host is a Mac, do `pbcopy < clipping`. If it is Linux, `xsel -b < clipping`.
