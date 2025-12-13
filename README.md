@@ -47,6 +47,12 @@ docker run --rm -it --detach-keys ctrl-z,z --name emacs-py \
 emacs-py
 ```
 
+Optionally:
+
+- map the `.ssh` directory onto the container's `/home/docker_usr` directory, so it will be possible to use my ssh keys;
+
+- expose the host's ssh-auth socket to the container. On a Mac the socket is at `/run/host-services/ssh-auth.sock`.
+
 ### use with Python:
 
 - Create a virtual environment for your project. Install pyright and jsonrpc.
