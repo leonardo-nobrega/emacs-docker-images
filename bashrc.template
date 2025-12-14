@@ -9,6 +9,12 @@ export WORKON_HOME=/code/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
 {% endif %}
 
+{%- if lang_ts %}
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+{% endif %}
+
 # use host's ssh agent
 if [ -e /run/host-services/ssh-auth.sock ]; then
     sudo chmod 777 /run/host-services/ssh-auth.sock
