@@ -47,7 +47,7 @@ apt-get install -y --no-install-recommends tzdata
 RUN ln -fs /usr/share/zoneinfo/America/Montreal /etc/localtime
 
 # install base packages
-RUN apt install -y emacs git curl jq sqlite3
+RUN apt install -y curl emacs git gpg jq sqlite3
 
 FROM base as emacs-packages
 # install emacs packages
