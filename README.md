@@ -5,6 +5,8 @@ Docker images for software development, containing Emacs and one or more of the 
 
 - Python
 
+- Typescript
+
 ## Why?
 
 - To have a piece of code that lists everything I use to work on programs.
