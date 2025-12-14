@@ -5,6 +5,7 @@ export LANG=en_CA
 {% if lang_py %}
 export PYTHONDONTWRITEBYTECODE=1
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+export WORKON_HOME=/code/.virtualenvs
 source /usr/local/bin/virtualenvwrapper.sh
 {% endif %}
 
