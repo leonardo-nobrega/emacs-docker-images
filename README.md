@@ -34,24 +34,7 @@ Here's a minimal command to run the container:
 docker run --rm -it --detach-keys ctrl-z,z --name emacs-py emacs-py
 ```
 
-Add to the above options to:
-
-- map a directory on the host where the projects are onto the container;
-
-- open ports for web servers in the container that I want to access with the browser on the host:
-
-```
-docker run --rm -it --detach-keys ctrl-z,z --name emacs-py \
--v $(pwd)/Documents/code:/code \
--p 8080:8080 \
-emacs-py
-```
-
-Optionally:
-
-- map the `.ssh` directory onto the container's `/home/docker_usr` directory, so it will be possible to use my ssh keys;
-
-- expose the host's ssh-auth socket to the container. On a Mac the socket is at `/run/host-services/ssh-auth.sock`.
+The `docker run` command in the file `start.sh` has options to map host directories into the container and to use the ssh-agent.
 
 ### use with Python:
 
