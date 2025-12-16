@@ -101,6 +101,7 @@ ENTRYPOINT pytest /run_test.py
 # epilogue
 COPY bashrc $DOCKER_USR_HOME/.bashrc
 COPY dot-emacs.el $DOCKER_USR_HOME/.emacs
+COPY gitconfig $DOCKER_USR_HOME/.gitconfig
 VOLUME /code
 WORKDIR /code
 CMD /bin/bash
