@@ -97,7 +97,7 @@ USER docker_usr
 COPY build_test.py /
 # ... test_emacs_packages_exist in build_test uses install.el
 COPY install.el /
-RUN pytest build_test.py
+RUN pytest -s build_test.py
 COPY run_test.py /
 ENTRYPOINT pytest /run_test.py
 {% else %}
