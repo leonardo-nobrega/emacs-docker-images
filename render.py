@@ -6,7 +6,7 @@ from os.path import exists
 from typing import Any
 
 LANGUAGES = ["py"]
-TEMPLATE_FILES = ["Dockerfile", "bashrc"]
+TEMPLATE_FILES = ["Dockerfile", "bashrc", "install.el"]
 
 
 def render_file(
