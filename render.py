@@ -8,7 +8,7 @@ from datetime import datetime
 from os.path import exists
 from typing import Any
 
-LANGUAGES = ["py"]
+LANGUAGES = ["py", "ts"]
 
 GIT_INFO_COMMAND = [
     "git", "log",
