@@ -71,6 +71,12 @@ https://olddeuteronomy.github.io/post/python-programming-in-emacs/
   docker run --rm emacs-py-test
   ```
 
+- In case you need to look inside the test image, override its entrypoint:
+
+  ```
+  docker run --rm -it --entrypoint=/bin/bash emacs-py-test
+  ```
+
 ### copy text out of Emacs onto the host's clipboard:
 
 Save it to a file, let's say `clipping`. If the host is a Mac, do `pbcopy < clipping`. If it is Linux, `xsel -b < clipping`.
