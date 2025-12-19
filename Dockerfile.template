@@ -85,6 +85,9 @@ RUN pip3 install pytest --break-system-packages
 # copy emacs packages from build stage
 COPY --from=emacs-packages /root/.emacs.d ${DOCKER_USR_HOME}/.emacs.d
 
+# MOTD file - contains build information
+COPY motd /etc/motd
+
 # change from root to docker_usr
 RUN chown -R docker_usr:docker_usr $DOCKER_USR_HOME
 USER docker_usr
