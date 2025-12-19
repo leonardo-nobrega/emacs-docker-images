@@ -28,6 +28,7 @@
 (setq treesit-language-source-alist
       (list
        ;; start-tree-sitter-list
+       '(yaml "https://github.com/ikatyang/tree-sitter-yaml")
        ;; end-tree-sitter-list
        ))
 (mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))
