@@ -23,4 +23,13 @@
       ))
   (package-install package))
 
+;; install tree-sitter grammars
+;; See: https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
+(setq treesit-language-source-alist
+      (list
+       ;; start-tree-sitter-list
+       ;; end-tree-sitter-list
+       ))
+(mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist))
+
 (kill-emacs)
