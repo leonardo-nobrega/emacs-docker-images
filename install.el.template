@@ -16,7 +16,9 @@
       'magit
       'markdown-mode
       'modus-themes
+{% if lang_py %}
       'virtualenvwrapper
+{% endif %}
       ;; end-package-list
       ))
   (package-install package))
