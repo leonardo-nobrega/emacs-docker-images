@@ -38,7 +38,7 @@ The `docker run` command in the file `start.sh` has options to map host director
 
 ### use with Python:
 
-- Create a virtual environment for your project. Install pyright and jsonrpc.
+- Create a virtual environment for your project. Install [`pyright`](https://microsoft.github.io/pyright/#/) and `jsonrpc`.
 
 - On Emacs:
   - `M-x venv-workon` to activate the virtual environment, then
