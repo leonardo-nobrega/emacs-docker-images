@@ -1,11 +1,26 @@
 
+import subprocess
+
 import jinja2 as j
 
 from argparse import ArgumentParser
+from datetime import datetime
 from os.path import exists
 from typing import Any
 
 LANGUAGES = ["py"]
+
+GIT_INFO_COMMAND = [
+    "git", "log",
+    "-1", "--pretty=hash %h; subject \"%s\"; refs: %D"
+]
+
+MOTD_TEMPLATE = """\
+Emacs container with languages: {}
+Build timestamp: {}
+Git info: {}
+"""
+
 TEMPLATE_FILES = ["Dockerfile", "bashrc", "install.el"]
 
 
@@ -26,6 +41,23 @@ def render(arguments: dict[str, Any]) -> None:
     )
     for file_name in TEMPLATE_FILES:
         render_file(env, file_name, arguments)
+
+
+def get_git_info() -> str:
+    completed_process = subprocess.run(GIT_INFO_COMMAND, capture_output=True)
+    completed_process.check_returncode()
+    return completed_process.stdout.decode()
+
+
+def generate_motd_file(selected_languages: list[str]) -> None:
+    timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+    git_info = get_git_info()
+    with open("motd", "w") as f:
+        f.write(MOTD_TEMPLATE.format(
+            ", ".join(selected_languages),
+            timestamp,
+            git_info
+        ))
 
 
 if __name__ == "__main__":
@@ -50,8 +82,10 @@ if __name__ == "__main__":
 
     if args.force:
         render(args_dict)
+        generate_motd_file(selected_languages)
     elif exists("Dockerfile"):
         print("Overwrite the Dockerfile? [N/y]")
         overwrite = input()
         if overwrite.strip().lower() == "y":
             render(args_dict)
+            generate_motd_file(selected_languages)
