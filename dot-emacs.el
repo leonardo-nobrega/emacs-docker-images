@@ -14,3 +14,9 @@
 
 ;; theme
 (modus-themes-select 'modus-vivendi)
+
+;; two lanes on the window
+(split-window-horizontally)
+
+;; this lets me open emacs clients in two or more terminals
+(server-start)
