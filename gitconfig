@@ -1,6 +1,0 @@
-[user]
-    name = Leonardo Nobrega
-    email = leonobr@gmail.com
-[core]
-    # ignore chmod changes
-    filemode = false

@@ -1,0 +1,8 @@
+[user]
+    name = Your Name
+    email = your_login@email_server
+[core]
+    # ignore chmod changes
+    filemode = false
+[init]
+    defaultBranch = main
