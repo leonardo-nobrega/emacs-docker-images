@@ -1,6 +1,6 @@
 [user]
-    name = Leonardo Nobrega
-    email = leonobr@gmail.com
+    name = Your Name
+    email = your_login@email_server
 [core]
     # ignore chmod changes
     filemode = false
