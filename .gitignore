@@ -10,3 +10,6 @@ bashrc
 Dockerfile
 install.el
 motd
+
+# gitconfig may contain personal info
+gitconfig
