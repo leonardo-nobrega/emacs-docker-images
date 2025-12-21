@@ -26,6 +26,8 @@ python render.py -l py
 docker build -t emacs-py .
 ```
 
+Optionally create a `gitconfig` file by adding your personal information to `example_gitconfig`.
+
 ### run a container after building an image:
 
 Here's a minimal command to run the container:
