@@ -18,5 +18,8 @@
 ;; two lanes on the window
 (split-window-horizontally)
 
+;; turn on line wrapping in org
+(setq org-startup-truncated nil)
+
 ;; this lets me open emacs clients in two or more terminals
 (server-start)
