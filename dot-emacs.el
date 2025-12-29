@@ -21,5 +21,9 @@
 ;; turn on line wrapping in org
 (setq org-startup-truncated nil)
 
+;; org mode code block expansion with "<s TAB"
+;; https://emacs.stackexchange.com/a/82500
+(require 'org-tempo)
+
 ;; this lets me open emacs clients in two or more terminals
 (server-start)
