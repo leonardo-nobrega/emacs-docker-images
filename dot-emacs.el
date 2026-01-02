@@ -27,3 +27,9 @@
 
 ;; this lets me open emacs clients in two or more terminals
 (server-start)
+
+;; no tabs, only spaces
+(setq-default indent-tabs-mode nil)
+
+;; four spaces for a tab
+(setq tab-width 4)
