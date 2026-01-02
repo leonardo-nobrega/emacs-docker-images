@@ -118,8 +118,11 @@ ENTRYPOINT pytest /run_test.py
 COPY bashrc $DOCKER_USR_HOME/.bashrc
 COPY dot-emacs.el $DOCKER_USR_HOME/.emacs
 
-# copying files that may not exist: https://stackoverflow.com/a/46801962
-COPY gitconfig* $DOCKER_USR_HOME/.gitconfig
+# copying files that may not exist:
+# 1st attempt: https://stackoverflow.com/a/46801962
+#   fails when there is an emacs backup: gitconfig~
+# 2nd attempt: https://stackoverflow.com/a/70096420
+COPY gitconfi[g] $DOCKER_USR_HOME/.gitconfig
 
 VOLUME /code
 WORKDIR /code
