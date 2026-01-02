@@ -22,6 +22,7 @@ start_debian() {
            -v ${HOME}/Documents/code:/code \
            -v ${HOME}/Documents/notes:/notes \
            -v ${HOME}/Downloads:/Downloads \
+           -v ${HOME}/.aws:/home/docker_usr/.aws \
            -v ${HOME}/.ssh:/home/docker_usr/.ssh \
            -v ${SSH_AUTH_SOCK_HOST_PATH}:${SSH_AUTH_SOCK_CONTAINER_PATH} \
            -e SSH_AUTH_SOCK=${SSH_AUTH_SOCK_CONTAINER_PATH} \
