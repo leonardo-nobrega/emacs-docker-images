@@ -18,5 +18,18 @@
 ;; two lanes on the window
 (split-window-horizontally)
 
+;; turn on line wrapping in org
+(setq org-startup-truncated nil)
+
+;; org mode code block expansion with "<s TAB"
+;; https://emacs.stackexchange.com/a/82500
+(require 'org-tempo)
+
 ;; this lets me open emacs clients in two or more terminals
 (server-start)
+
+;; no tabs, only spaces
+(setq-default indent-tabs-mode nil)
+
+;; four spaces for a tab
+(setq tab-width 4)
